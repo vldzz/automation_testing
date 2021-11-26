@@ -2,8 +2,8 @@ package org.example.logger;
 
 import lombok.AllArgsConstructor;
 import lombok.Setter;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.log4j.Logger;
+
 
 
 @AllArgsConstructor
@@ -12,7 +12,7 @@ public class LocalLogger {
     private Logger logger;
 
     public static LocalLogger getLogger(Class<?> clazz) {
-        return new LocalLogger(LoggerFactory.getLogger(clazz));
+        return new LocalLogger(Logger.getLogger(clazz));
     }
 
     public void error(String str) {
@@ -30,4 +30,5 @@ public class LocalLogger {
     public void debug(String str) {
         logger.debug(str);
     }
+
 }

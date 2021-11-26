@@ -8,7 +8,7 @@ import org.openqa.selenium.support.PageFactory;
 
 
 public abstract class WebPage {
-    private LocalLogger logger;
+    protected LocalLogger logger;
     private String GLOBAL_PAGE_URL = "https://demoqa.com/";
     protected WebDriver webDriver;
 

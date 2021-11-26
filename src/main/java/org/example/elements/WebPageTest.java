@@ -11,7 +11,7 @@ import org.openqa.selenium.WebDriver;
 import java.lang.reflect.InvocationTargetException;
 
 public abstract class WebPageTest {
-    private LocalLogger logger;
+    protected LocalLogger logger;
     private Class<?> clazz;
     protected WebDriver webDriver;
     protected WebPage page;
@@ -37,10 +37,6 @@ public abstract class WebPageTest {
     public void closeDriver() {
 //        sleep(1000);
         webDriver.close();
-    }
-
-    public void log(String text) {
-        logger.error(text);
     }
 
     public static void sleep(long milis) {

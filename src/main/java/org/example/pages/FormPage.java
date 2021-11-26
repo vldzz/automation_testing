@@ -1,6 +1,7 @@
 package org.example.pages;
 
 import lombok.Getter;
+import org.apache.log4j.Logger;
 import org.junit.Assert;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
@@ -14,12 +15,13 @@ import java.time.Duration;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.IntStream;
 
 @Getter
 public class FormPage extends WebPage {
     private static String PATH_URL = "automation-practice-form";
+
+    private static Logger loggerTest = Logger.getLogger(FormPage.class);
 
     private final HashMap<ELEMENTS, String> selectedValues = new HashMap<>();
 
@@ -86,9 +88,6 @@ public class FormPage extends WebPage {
 
         @Getter
         private WebElement element;
-
-        @Getter
-        private List<WebElement> elementList;
     }
 
     public FormPage(WebDriver webDriver) {
@@ -97,22 +96,22 @@ public class FormPage extends WebPage {
         ELEMENTS.FIRST_NAME.element = firstName;
         ELEMENTS.LAST_NAME.element = lastName;
         ELEMENTS.EMAIL.element = email;
-        ELEMENTS.GENDER.elementList = genders;
         ELEMENTS.MOBILE.element = phone;
         ELEMENTS.BIRTH.element = birth;
         ELEMENTS.SUBJECTS.element = subjects;
-        ELEMENTS.HOBBIES.elementList = hobbies;
         ELEMENTS.PICTURE.element = image;
         ELEMENTS.ADDRESS.element = address;
         ELEMENTS.STATE.element = state;
         ELEMENTS.CITY.element = city;
     }
 
+
+    //TODO: Move to test
     public void validate() {
         for (int i = 0; i < values.size(); i += 2) {
             String label = values.get(i).getText().toLowerCase();
             String value = values.get(i + 1).getText();
-            String foundedValue;
+            String foundedValue = "";
 
             switch (label) {
                 case "student name":
@@ -138,7 +137,8 @@ public class FormPage extends WebPage {
                     foundedValue = selectedValues.get(defaultElement);
             }
 
-            log(String.format("%s -> %s", value, foundedValue));
+            loggerTest.debug(String.format("%s -> %s", value, foundedValue));
+//            Logger.getLogger(FormPage.class).debug(String.format("%s -> %s", value, foundedValue));
             Assert.assertEquals(value, foundedValue);
         }
     }

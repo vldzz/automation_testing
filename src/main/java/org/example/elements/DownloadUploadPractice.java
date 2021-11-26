@@ -31,7 +31,7 @@ public class DownloadUploadPractice extends WebPageTest {
 
         File downloadedFile = waitForFile.until((o) -> {
             File fileToFind = new File(FILE_LOCATOR);
-            log("waiting....");
+            logger.info("waiting....");
             return fileToFind.exists() ? fileToFind : null;
         });
         Assert.assertTrue(downloadedFile.exists());
